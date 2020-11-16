@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      DBD Stats
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-radio-group [value]="currentMatch.survivorOutcome[i]" *ngFor="let dummy of [null, null, null, null]; let i=index" (ionChange)="outcomeChange($event, i)">
+      <ion-row>
+        <ion-label>Survivor {{i + 1}}: </ion-label>
+        <ion-item *ngFor="let outcome of possibleOutcomes">
+          <ion-label>{{outcome.display}}</ion-label>
+          <ion-radio [value]="outcome.value"></ion-radio>
+        </ion-item>
+      </ion-row>
+    </ion-radio-group>
+    <ion-item>
+      <ion-label position="floating">Gens done</ion-label>
+      <ion-input enterkeyhint="next" inputmode="numeric" max="5" min="-1" type="number" placeholder="-1 if you can't remember" [(ngModel)]="currentMatch.gensDone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mori</ion-label>
+      <ion-checkbox [(ngModel)]="currentMatch.mori"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>NOED</ion-label>
+      <ion-checkbox [(ngModel)]="currentMatch.noed"></ion-checkbox>
+    </ion-item>
+    <ion-button (click)="saveMatch()">Save Match</ion-button>
+  </div>
+</ion-content>
